@@ -1,0 +1,16 @@
+JAVA Installation
+==================
+
+$ sudo apt-get install openjdk-14-jdk
+
+
+Now, open Home directory & enabled hidden files to show .bashrc file & add two line in the end.
+
+-------------------------------------------------------------
+export JAVA_HOME=/usr/lib/jvm/java-1.14.0-openjdk-amd64
+export PATH=$PATH:/usr/lib/jvm/java-1.14.0-openjdk-amd64/bin
+-------------------------------------------------------------
+
+======================================================================================================
+
+
