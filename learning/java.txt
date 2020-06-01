@@ -1,0 +1,115 @@
+JAVA
+=====
+
+COMPILE & RUN
+==============
+
+How to Compile?
+----------------
+* Every java file (i.e; Hello.java) convert into byte code file (i.e; Hello.class)
+
+$ javac <name>.java -> To produce byte code(<name>.class)
+
+How to Run?
+------------
+* Every binary file (i.e Hello.class) goes into JVM(Java Virtual Machine) which has software called Interpreter(Just in time compiler: has combination of both compiler & interpreter as OS execute line of code during the time compiler translate more code which is readable by OS and store it temporary memory) thus in OS.
+
+$ java <name>
+
+JDK(Java Developement Kit) vs. JRE(Java Run Environment)
+---------------------------------------------------------
+
+jdk -> contain compiler(javac.exe), Appilcation launcher(java.exe), etc
+jre -> contain JVM(Java Virtual Machine) & Java Package Classes(Java Libraries) 
+
+* JVM -> Platform dependent.
+* JVM -> Provides a platform-independent way of execution of code.
+
+=======================================================================
+
+About Java
+===========
+
+* Case sensitive.
+* Almost 100% OOP. But not 100%.
+* In java, it's not possible to make a function which is not a member of any class (as we can do in C++).
+ 
+
+=======================================================================
+
+First Program
+==============
+
+>>> File: FirstProgram.java <<<
+---------------------------------------------------------------------
+
+//////////////// First Program by Saurabh Shukla
+// * Java use Camel Case.
+// * Java has 4 modifiers public, privatge, protected & default.
+// * Outer class must be public or protected.
+// * Class name must be as prgram name. i.e; Prgram.java -> class program
+
+public class FirstProgram {
+    // Public: It is public to call from outside
+    // static: Any static member can be called without making object.
+    // void: Does'nt return anything.
+    // String[] args: Array of string recieve args from CLI.
+    public static void main(String[] args) {
+        // System: Predefined class as it starts with capital letter.
+        // <class Name>. -> Dot after class name shows that static member(i.e; variable, function).
+        // out: Reference variable that represent object.
+        // out.println(): Call object member of reference variable "out"
+        System.out.println("Hello World");
+    }
+} // No semi colon as like C++
+
+---------------------------------------------------------------------
+
+$ javac FirstProgram.java 
+
+$ java FirstProgram
+
+=======================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
