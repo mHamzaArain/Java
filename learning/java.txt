@@ -1,8 +1,18 @@
 JAVA
 =====
 
-COMPILE & RUN
-==============
+1. About Java
+===========
+
+* Case sensitive.
+* Almost 100% OOP. But not 100%.
+* In java, it's not possible to make a function which is not a member of any class (as we can do in C++).
+* Strongly typed language. 
+
+2. COMPILE & RUN
+=================
+
+see image: 01_compileOfCode.png
 
 How to Compile?
 ----------------
@@ -25,19 +35,10 @@ jre -> contain JVM(Java Virtual Machine) & Java Package Classes(Java Libraries)
 * JVM -> Platform dependent.
 * JVM -> Provides a platform-independent way of execution of code.
 
-=======================================================================
-
-About Java
-===========
-
-* Case sensitive.
-* Almost 100% OOP. But not 100%.
-* In java, it's not possible to make a function which is not a member of any class (as we can do in C++).
- 
 
 =======================================================================
 
-First Program
+3. First Program
 ==============
 
 >>> File: FirstProgram.java <<<
@@ -71,17 +72,213 @@ $ java FirstProgram
 
 =======================================================================
 
+4. Data Types and Keywords
+========================
+
+List of keywords in java.
+see image: 02_keywords.png 
+
+* Java is strongly typed language.
+* Data types has two types:
+	1. Primitive	-> See image: 03_primitive_dataType.png
+	2. User-defined 
+
+* In Java String is a class not primitive datatype it use only char.
+i.e;
+	1. int counter;
+	2. double temp;
+	3. int[] ages;
+	4. char letters[];
+	5. String name;	      -> String class
+
+=======================================================================
+
+5. Comments
+============
+
+1. /*....*/	-> Multi lines comment
+2. //		-> Single line comment
+3. /**...*/ 	-> Documentation 
+
+6. Type Conversion
+===================
+
+a. Widening conversion
+-----------------------
+int y=3;
+float x=y; //Widening conversion, no error
+
+b. Narrowing Conversion
+------------------------
+float x=3.4f;  // f-> denotes floats
+int y=x;       // narrowing conversion, error
+
+int y=(int)x;  // enforced type casting, no error
+  
+float k=3.5;   // narrowing conversion, error
+
+float k=23.5f; // no error
+
+c. Permitted Conversion
+------------------------
+	1. byte    -> short, int, long, float, double
+	2. short   -> int, long, float, double
+	3. char    -> int, long, float, double
+	4. int	   -> long, float, double	
+	5. float   -> double
+
+=======================================================================
+
+7. Classes and Objects
+=======================
+
+Class
+------
+* Description of object's property.
+* Class is defing a catagory of data.
+
+Object
+-------
+* It's real world entity.
+* It's instance of class.
+* It holds memory to store prperty value.
+
+>>> File: ClassesAndObjects.java <<<
+--------------------------------------------------------------------
+
+/**
+ * Define class Box with length, breath & height as
+ * member variables. Also define setDimension() & 
+ * showDimension() as member functions.
+ */
 
 
+class Box
+/**
+ *  This class has total 5 members:
+ *  3 variables -> properties
+ *  2 functions -> methods
+ */
+{
+    private int length, breath, height;
 
+    public void setDimension(int l, int b, int h){
+        length=l; breath=b; height=h;
+    }
 
+    public void showDimension(){
+        System.out.println("L="+length);
+        System.out.println("B="+breath);
+        System.out.println("H="+height);
+    }
+}
 
+class ClassesAndObjects
+{
+    public static void main(String[] args){
+        // Java supports only dynamic creating of objects
+        Box dabbah = new Box(); // dynamically crreated obj
+        dabbah.setDimension(12, 12, 12);
+        dabbah.showDimension();  // L=12 B=12 H=12
 
+        // now this variable points new object 
+        // previous object remain in garbidge cleaned by garbage collector
+        dabbah = new Box();
+        
+        // Bydefault values initialized with zero
+        dabbah.showDimension();  // L=0 B=0 H=0
+    }
+}
 
+--------------------------------------------------------------------
 
+$ javac ClassesAndObjects.java
 
+$ java ClassesAndObjects
 
+=======================================================================
 
+Static member
+==============
+
+* Static member variable
+* Static member function
+* ..& not static variable in methods
+* ..but we can have static inner class
+
+Static variables
+-----------------
+1. Static variables are by default init. to its default value. 
+2. It has single coopy for whole class & does'nt depend upon obj.
+ 
+Static Function
+----------------
+1. Defined inside class.
+2. Static function can only access static members of the same class.
+3. Static function can be invoked using class name & operator.
+
+>>> File: Static_Keyword.java <<<
+--------------------------------------------------------------------
+
+/**
+ * Static Keyword
+ * ===============
+ * 
+ * Static Variable
+ * ----------------
+ * 1. Static variables are by default init. to its default value. 
+ * 2. It has single coopy for whole class & does'nt depend upon obj.
+ * 
+ * Static Function
+ * ----------------
+ * 1. Defined inside class.
+ * 2. Static function can only access static members of the same class.
+ * 3. Static function can be invoked using class name & operator.
+ */
+
+class Static
+{
+    int x;         //Instance variable
+    static int y;  // static member variable      
+    private int z; // can't be accessed outside of class
+
+    public void func1() {        // Instance member function
+        // static int var; // error
+    }
+    
+    public static void func2() {} // static member function
+
+    // Static inner class
+    static class Test {
+        public static String country="PAKISTAN";
+    }
+}
+
+public class Static_Keyword
+{
+    public static void main(String[] args){
+        // These both objs. created instance variable twice.
+        // Objs. doesn't create static variable as it's only for class
+        Static ex1 = new Static();
+        Static ex2 = new Static();
+        
+        // Class name after dot is static member of that class.
+        Static.y=3;     // Bydefault it is zero
+        Static.func2();
+
+        // Class "Static" has static inner class "Test"
+        // having public static variable "country"
+        System.out.println(Static.Test.country);
+    }
+}
+
+--------------------------------------------------------------------
+
+$ javac Static_Keyword.java
+
+$ java Static_Keyword
+
+=======================================================================
 
 
 
