@@ -1,0 +1,1734 @@
+JAVA
+=====
+
+1. About Java
+===========
+
+* Case sensitive.
+* Almost 100% OOP. But not 100%.
+* In java, it's not possible to make a function which is not a member of any class (as we can do in C++).
+* Strongly typed language. 
+
+2. COMPILE & RUN
+=================
+
+see image: 01_compileOfCode.png
+
+How to Compile?
+----------------
+* Every java file (i.e; Hello.java) convert into byte code file (i.e; Hello.class)
+
+$ javac <name>.java -> To produce byte code(<name>.class)
+
+How to Run?
+------------
+* Every binary file (i.e Hello.class) goes into JVM(Java Virtual Machine) which has software called Interpreter(Just in time compiler: has combination of both compiler & interpreter as OS execute line of code during the time compiler translate more code which is readable by OS and store it temporary memory) thus in OS.
+
+$ java <name>
+
+JDK(Java Developement Kit) vs. JRE(Java Run Environment)
+---------------------------------------------------------
+
+jdk -> contain compiler(javac.exe), Appilcation launcher(java.exe), etc
+jre -> contain JVM(Java Virtual Machine) & Java Package Classes(Java Libraries) 
+
+* JVM -> Platform dependent.
+* JVM -> Provides a platform-independent way of execution of code.
+
+
+=======================================================================
+
+3. First Program
+==============
+
+>>> File: FirstProgram.java <<<
+---------------------------------------------------------------------
+
+//////////////// First Program by Saurabh Shukla
+// * Java use Camel Case.
+// * Java has 4 modifiers public, privatge, protected & default.
+// * Outer class must be public or protected.
+// * Class name must be as prgram name. i.e; Prgram.java -> class program
+
+public class FirstProgram {
+    // Public: It is public to call from outside
+    // static: Any static member can be called without making object.
+    // void: Does'nt return anything.
+    // String[] args: Array of string recieve args from CLI.
+    public static void main(String[] args) {
+        // System: Predefined class as it starts with capital letter.
+        // <class Name>. -> Dot after class name shows that static member(i.e; variable, function).
+        // out: Reference variable that represent object.
+        // out.println(): Call object member of reference variable "out"
+        System.out.println("Hello World");
+    }
+} // No semi colon as like C++
+
+---------------------------------------------------------------------
+
+$ javac FirstProgram.java 
+
+$ java FirstProgram
+
+=======================================================================
+
+4. Data Types and Keywords
+========================
+
+List of keywords in java.
+see image: 02_keywords.png 
+
+* Java is strongly typed language.
+* Data types has two types:
+	1. Primitive	-> See image: 03_primitive_dataType.png
+	2. User-defined 
+
+* In Java String is a class not primitive datatype it use only char.
+i.e;
+	1. int counter;
+	2. double temp;
+	3. int[] ages;
+	4. char letters[];
+	5. String name;	      -> String class
+
+=======================================================================
+
+5. Comments
+============
+
+1. /*....*/	-> Multi lines comment
+2. //		-> Single line comment
+3. /**...*/ 	-> Documentation 
+
+6. Type Conversion
+===================
+
+a. Widening conversion
+-----------------------
+int y=3;
+float x=y; //Widening conversion, no error
+
+b. Narrowing Conversion
+------------------------
+float x=3.4f;  // f-> denotes floats
+int y=x;       // narrowing conversion, error
+
+int y=(int)x;  // enforced type casting, no error
+  
+float k=3.5;   // narrowing conversion, error
+
+float k=23.5f; // no error
+
+c. Permitted Conversion
+------------------------
+	1. byte    -> short, int, long, float, double
+	2. short   -> int, long, float, double
+	3. char    -> int, long, float, double
+	4. int	   -> long, float, double	
+	5. float   -> double
+
+=======================================================================
+
+7. Classes and Objects
+=======================
+
+Class
+------
+* Description of object's property.
+* Class is defing a catagory of data.
+
+Object
+-------
+* It's real world entity.
+* It's instance of class.
+* It holds memory to store prperty value.
+
+>>> File: ClassesAndObjects.java <<<
+--------------------------------------------------------------------
+
+/**
+ * Define class Box with length, breath & height as
+ * member variables. Also define setDimension() & 
+ * showDimension() as member functiot.
+ */
+
+
+class Box
+/**
+ *  This class has total 5 members:
+ *  3 variables -> properties
+ *  2 functions -> methods
+ */
+{
+    private int length, breath, height;
+
+    public void setDimension(int l, int b, int h){
+        length=l; breath=b; height=h;
+    }
+
+    public void showDimension(){
+        System.out.println("L="+length);
+        System.out.println("B="+breath);
+        System.out.println("H="+height);
+    }
+}
+
+class ClassesAndObjects
+{
+    public static void main(String[] args){
+        // Java supports only dynamic creating of objects
+        Box dabbah = new Box(); // dynamically crreated obj
+        dabbah.setDimension(12, 12, 12);
+        dabbah.showDimension();  // L=12 B=12 H=12
+
+        // now this variable points new object 
+        // previous object remain in garbidge cleaned by garbage collector
+        dabbah = new Box();
+        
+        // Bydefault values initialized with zero
+        dabbah.showDimension();  // L=0 B=0 H=0
+    }
+}
+
+--------------------------------------------------------------------
+
+$ javac ClassesAndObjects.java
+
+$ java ClassesAndObjects
+
+=======================================================================
+
+Static member
+==============
+
+* Static member variable
+* Static member function
+* ..& not static variable in methods
+* ..but we can have static inner class
+
+Static variables
+-----------------
+1. Static variables are by default init. to its default value. 
+2. It has single coopy for whole class & does'nt depend upon obj.
+ 
+Static Function
+----------------
+1. Defined inside class.
+2. Static function can only access static members of the same class.
+3. Static function can be invoked using class name & operator.
+
+>>> File: Static_Keyword.java <<<
+--------------------------------------------------------------------
+
+/**
+ * Static Keyword
+ * ===============
+ * 
+ * Static Variable
+ * ----------------
+ * 1. Static variables are by default init. to its default value. 
+ * 2. It has single coopy for whole class & does'nt depend upon obj.
+ * 
+ * Static Function
+ * ----------------
+ * 1. Defined inside class.
+ * 2. Static function can only access static members of the same class.
+ * 3. Static function can be invoked using class name & operator.
+ */
+
+class Static
+{
+    int x;         //Instance variable
+    static int y;  // static member variable      
+    private int z; // can't be accessed outside of class
+
+    public void func1() {        // Instance member function
+        // static int var; // error
+    }
+    
+    public static void func2() {} // static member function
+
+    // Static inner class
+    static class Test {
+        public static String country="PAKISTAN";
+    }
+}
+
+public class Static_Keyword
+{
+    public static void main(String[] args){
+        // These both objs. created instance variable twice.
+        // Objs. doesn't create static variable as it's only for class
+        Static ex1 = new Static();
+        Static ex2 = new Static();
+        
+        // Class name after dot is static member of that class.
+        Static.y=3;     // Bydefault it is zero
+        Static.func2();
+
+        // Class "Static" has static inner class "Test"
+        // having public static variable "country"
+        System.out.println(Static.Test.country);
+    }
+}
+
+--------------------------------------------------------------------
+
+$ javac Static_Keyword.java
+
+$ java Static_Keyword
+
+=======================================================================
+
+Commandline Argument
+=====================
+
+>>> File: commandLine_Args.java <<<
+--------------------------------------------------------------------
+
+// Command Line Argument
+
+public class commandLine_Args
+{
+    public static void main(String[] args){
+        int sum = 0;
+        for (int i=0; i < args.length; i++){
+            sum += Integer.parseInt(args[i]);
+        }
+        System.out.print("Sum: " + sum);
+    }
+}
+
+--------------------------------------------------------------------
+
+$ javac commandLine_Args.java
+
+$ java commandLine_Args 12 23 
+
+=======================================================================
+
+Package
+========
+
+>>> File: HelloWorld.java <<<
+--------------------------------------------------------------------
+
+/**
+ * Package
+ * ========
+ * 
+ * 1. Package contain mutiple classes.
+ * 2. In same package class name must be differ to each other.
+ * 3. Different packages may hold similar class names 
+ *    but in same package class name must be differ.
+ * 
+ */
+
+
+
+package world;  // This include package name world
+
+public class HelloWorld
+{
+    public static void main(String[] args){
+        System.out.print("Hello World");
+    }
+}
+
+--------------------------------------------------------------------
+
+# -d -> Directory, . -> current directory
+$ javac -d . HelloWorld.java
+
+$ java world.HelloWorld
+
+=======================================================================
+
+12. import Keyword
+===================
+
+>>> File: Student.java <<<
+--------------------------------------------------------------------
+
+package pack2;
+
+public class Student
+{
+    private int rollno;
+    private String name;
+    
+    public void setRollno(int r){
+        rollno = r;
+    }
+    
+    public void setName(String n){
+        name = n;
+    }
+
+    public int getRollno(){
+        return rollno;
+    }
+    public String getName(){
+        return name;
+    }
+}
+
+--------------------------------------------------------------------
+
+>>> File: Example.java <<<
+--------------------------------------------------------------------
+
+package pack1;
+
+import pack2.Student;
+
+public class Example
+{
+    public static void main(String[] args){
+        Student s1 = new Student();
+        s1.setRollno(100);
+        s1.setName("Hamza");
+        System.out.println("Roll no.: " +s1.getRollno());
+        System.out.println("Name: " + s1.getName());
+    }
+}
+
+--------------------------------------------------------------------
+
+$ javac -d . Student.java
+
+$ javac -d . Example.java
+
+$ java pack1.Example
+
+=======================================================================
+
+13. Access modifiers
+=====================
+
+a. private
+b. protected
+c. public
+d. default
+
+Note: These can be used for class, members variables & member function.
+
+With Class
+-----------
+* Outer class & inner class.
+* Only 1 public outer class in java file.
+* Outer class -> Either with public or just class name means default.
+* Inner class -> Any four can be used here.
+
+With member varaibles & functions
+----------------------------------
+* private   ->  Member of the class can't be accessed from outsde
+                of class body. They meant to accessed from the same
+                class in which they are declared.
+* protected ->  Menber of the same package & child class from other
+                package can be accessed.
+* public    ->  They can be accessed from anywhere.
+* defaullt  ->  They are accessible only form the class
+                of same package.
+
+=======================================================================
+
+14. Constructors
+=================
+* Constructor is a member function of class.
+* The name if constructor is same as the name of class.
+* It has no return type.
+* It's special method used to init.newly created obj called implicitlly,
+    just after memory is allocated for obj.
+* It's not mandatory to write constructor. Altho; compiler implicitly 
+    provide constructor
+    e.g; 
+    class Box{
+        Box{}
+    }
+* Contructor can be parameterized.
+* Contructor can be overloaded(i.e; same name but different no. of parameter/s)
+
+>>> File: Box.java <<<
+--------------------------------------------------------------------
+
+public class Box
+{
+    private int l, b, h;  // These only accessible in this class
+
+    // Constructor
+    // Constructor provided by compiler implicitly but it's empty.
+    //  If no parameter constructor made. 
+    // public Box() { }
+
+
+    // Overloading by pre-provided args. 
+    public Box() { l=1; b=1; h=1; }
+
+    public Box(int L, int B, int H)
+    { l=L; b=B; h=H; }
+
+    public static void main(String[] args){
+        // Calling constructor at the time of its init.
+        Box b1 = new Box();
+        Box b2 = new Box(20, 15, 32);
+    }
+
+
+}
+
+--------------------------------------------------------------------
+
+=======================================================================
+
+15. Inheritance
+================
+
+* Multiple inheritance(i.; Multiple parents of subclasses) not allowed.
+* Parent class has unlimited subclasses.
+* private members can be inherit but not accessed.
+* Default members can have accessibilty in the subclass of same 
+    package but not other package.
+
+Syntax
+-------
+class SubClass extends SuperClass { }
+
+* Extends       -> keywords
+* Base Class    -> Super Class
+* Derived Class -> Sub Class
+
+Allowance on Inheritance
+-------------------------
+* Single(Given code is that example)
+* Multi-level
+* Hirarchical 
+
+see image: 15_inheritance_java.jpg
+
+>>> File: Person.java <<<
+--------------------------------------------------------------------
+public class Person 
+{
+    private int age;
+    private String name;
+    
+    public void setAge(int a)
+        { age = a; }
+
+    public void setName(String n)
+        {name = n; }
+
+    public int getAge()
+        { return age; }
+
+    public String getName()
+        { return name; }
+}
+
+--------------------------------------------------------------------
+
+
+>>> File: Student.java <<<
+--------------------------------------------------------------------
+class Student extends Person
+{
+    private int rollno;
+    
+    public void setRollno(int r)
+        { rollno = r; }
+
+    public int getRollno()
+        { return rollno; }
+}
+
+--------------------------------------------------------------------
+
+
+>>> File: Inherit.java <<<
+--------------------------------------------------------------------
+public class Inherit 
+{
+    public static void main(String[] args){
+        Student s1 = new Student();
+        s1.setRollno(100);
+        s1.setName("Hamza");
+        s1.setAge(21);
+
+        System.out.println("Rollno: " + s1.getRollno());
+        System.out.println("Name: " + s1.getName());
+        System.out.println("Age: " + s1.getAge());
+    }
+}
+
+--------------------------------------------------------------------
+
+$ javac *.java
+
+$ java Inherit
+
+=======================================================================
+
+16. Initialization block
+=========================
+
+* Instance initialization block.
+* Static initialization block.
+
+Static vs. Instance init.
+-------------------------
+* Static init. execute when class init. | Intance init. execute when object is created. 
+* It execute only once.                 | It execute when multiple times.
+* No use of "super" & "this" keyword.   | Use of "super" & "this" keyword allowed. 
+
+>>> InstanceInit.java <<<
+--------------------------------------------------------------------
+public class InstanceInit
+{
+    // member variable
+    private int x;
+
+    /** 
+     * Instance Initialization block 
+     * ==============================
+     * You ca write multiple initialization blocks. Later
+     * JVM compiles it into 1 initialization block then write
+     * them into constructor in the biginning which will execute 
+     * first then further code of instructor will execute.
+     * 
+     * Note:
+     * 1. Instance init. block execute when object is created.
+     * 2. return key cna't be used.
+     * 3. Altho; we can use "this" and "super" keyword.
+    */
+    {
+        System.out.println("Init. block: x = "+x);
+        x=5;
+    }
+
+    public InstanceInit(){
+        System.out.println("Constructor: x = "+x);
+    }
+
+    public static void main(String[] args){
+        InstanceInit ib = new InstanceInit();
+    }
+}
+--------------------------------------------------------------------
+
+
+>>> StaticInit.java <<<
+--------------------------------------------------------------------
+public class StaticInit 
+{
+    private static int k;
+    
+     /** 
+     * Static Initialization block 
+     * ============================
+     * You ca write multiple initialization blocks. Later
+     * JVM compiles it into 1 initialization block.
+     * 
+     * Note:
+     * 1. Static init. block execute when class is init.
+     * 2. return key cna't be used.
+     * 3. We can't use "this" and "super" keyword.
+     * 4. Static initializers may be used to ini. the class variables of the class.
+     * 5. It will execute befotre constructtor.
+    */
+
+    static {
+        System.out.println("Static init. block: k = "+k);
+        k = 10;
+    }
+
+    public static void main(String[] args) {
+        new StaticInit();
+    }
+}
+--------------------------------------------------------------------
+
+
+
+=======================================================================
+
+17. Overloading & Overriding
+============================
+
+>>> Overloading.java <<<
+--------------------------------------------------------------------
+/**
+ * Overloading: Same name of diff. signatuture(diff. no. args)
+ * ============================================================
+ * It is allowed in Parent & child class to inherit them.
+ */
+
+class Parent {
+    public void Overload(int a) { System.out.println("Parent: 1 func"); }
+    public void Overload(int a, int b) { System.out.println("Parent: 2 func"); }
+}
+
+class Child extends Parent {
+    public void Overload(int a, int b, int c) { System.out.println("Child: 1 func"); }
+    public void Overload(int a, int b, int c, int d) { System.out.println("Child: 2 func"); }
+}
+
+public class Overloading 
+{
+    public static void main(String[] args){
+        Child obj= new Child();
+        obj.Overload(1);
+        obj.Overload(1, 2);
+        obj.Overload(1, 2, 3);
+        obj.Overload(1, 2, 3, 4);
+    }
+}
+
+--------------------------------------------------------------------
+
+
+>>> Overriding.java <<<
+--------------------------------------------------------------------
+/**
+ * Overriding: Defining method in subclass eith the same signature.
+ * ================================================================= 
+ */
+
+class Base {
+    public void Overriding(int a) { System.out.println("Base"); }
+}
+
+class Derived extends Base {
+    public void Overriding(int a) { System.out.println("Derived"); }
+}
+
+public class Overriding 
+{
+    public static void main(String[] args) {
+        Base b = new Base();
+        b.Overriding(1);
+
+        Derived d = new Derived();
+        d.Overriding(1);
+    }    
+}
+
+--------------------------------------------------------------------
+
+=======================================================================
+
+18. final keyword
+==================
+
+>>> File: Final.java <<<
+--------------------------------------------------------------------
+/**
+ * final Keyword
+ * ==============
+ * a. final instance variable: 
+ * b. final static variable:
+ *    ------------------------ 
+ *    Bydefault its blank when it's init. Altho; we can declared by 3 ways.
+ *      1) Constructor 
+ *      2) Instance init. block -> Instance variable | Static init. block -> Static varible
+ *      3) At the time of init.(i.e; private final int x = 5; ) 
+ *    This can't be altered when init.
+ * 
+ * 
+ *    ----------------------
+ *    Bydefault its blank when it's init.
+ * 
+ * c. final local variable: There values can't be altered.
+ * d. final class: This can't be inherit to other class.
+ * e. final methods: These can't be overriden.  
+ */
+
+public class Final 
+{
+    private final int x;            // a. final instance variable
+    private final static int y=6;   // b. final static variable
+
+    // Ways to use final instance/static variable 
+    { x = 5; } // Instance init. block
+    static { } // Static init. block
+    Final() {} // Contructor
+    
+    public static void func() { 
+        int k;         // local variable(inside variable) = blank value  
+        final int l=1; // c. final local variable  This value can't be changed  
+    } 
+    public static void main(String[] args) {
+        Final f = new Final();
+    }
+}
+
+// d. This class cant be inherit to other class
+final class Test { }
+
+// e. final method: This can't be overridden 
+class Teach{
+    public final void func1() { }  // final method
+    public void func2() { }
+}
+
+class Exam extends Teach {  
+    // public void func1() { }
+    public void func2() { }
+}
+
+--------------------------------------------------------------------
+
+=======================================================================
+
+19. this keyword
+=================
+
+>>> File: This.java <<<
+--------------------------------------------------------------------
+
+/**
+ * this keyword
+ * =============
+ * 1. The "this" obj. reference is a local variable in instance member
+ *    methods referring the caller obj.
+*/
+
+class Gift { 
+    public void acceptGift(Object obj) {}
+}
+
+class Box {
+    private int l, b, h;  // Instance variables
+
+    // * Bydefault instance variables referenced by "this" but it's invisible.
+    // * If local variables is same as instance variables(i.e; Inst. variables
+    //      access to all members in class) "this" use here to differ it.
+    // *  NOTE: local variable has high precedence over inst. variable.
+    public void setDim(int l, int b, int x) // Instance member function
+    { this.l=l; this.b=b; h=x; }
+
+    public void sendBox() {
+        Gift g = new Gift();
+        g.acceptGift(this);
+    }
+}
+
+public class This 
+{
+    public static void main(String[] args) {
+        Box b1 = new Box();
+        b1.setDim(1, 2, 3);
+        b1.sendBox();    
+    }
+}
+
+--------------------------------------------------------------------
+
+=======================================================================
+
+20. super keyword
+==================
+
+>>> File: Super.java <<<
+--------------------------------------------------------------------
+/**  Super Keyword
+ *  ===============
+ *  Super -> Parent class
+ *  this  -> Same class OR child class
+*/
+
+class Parent {
+    String x;
+    public void f1() {}
+}
+
+class Child extends Parent {
+    String x;
+
+    public void f1() {}
+
+    public void f2() {
+        String x;
+        
+        super.f1();  // Parent class function.
+        this.f1();   // Same class function.
+        
+        super.x = "Parent instance variable";
+        this.x = "Child instance variable"; 
+        x = "Local variable";
+        
+        System.out.println(super.x);
+        System.out.println(this.x);
+        System.out.println(x); 
+    } 
+}
+
+public class Super 
+{
+    public static void main(String[] args) {
+        Child obj = new Child();
+        obj.f1();
+        obj.f2();
+    }
+}
+--------------------------------------------------------------------
+
+=======================================================================
+
+21. static members in inheritance
+=================================
+
+>>> File: StaticInherit.java <<<
+--------------------------------------------------------------------
+/**
+ * Static Members in Inheritance
+ * ==============================
+ * 1. Function hiding: parent & child classes having 
+ *       same name & signature with static keyword.
+ * 2. Overriding function: parent & child classes having 
+ *       same name & signature does'nt use static kwyword.
+ * 
+ * NOTE:
+ * -----
+ * 1. Methods either static or non-static are inheritance. 
+ * 2. Static variable can't be inherit.
+ * 3. Compile-time error -> static method hides instance method.
+ * 4. Compile-time error -> instance method overrides static.
+ */
+
+class Parent {
+    static int x = 4;
+
+    public static void f1() { }
+    public void f2() { }
+} 
+
+class Child extends Parent {
+    public static void f1() { } // Function hiding
+    public void f2() { }        // Overriding function
+
+    static { x=5; }
+}
+
+public class StaticInherit 
+{
+    public static void main(String[] args) {
+        Child.f1();
+        System.out.println(Child.x);
+    }
+}
+
+--------------------------------------------------------------------
+
+
+=======================================================================
+
+22 .Contructors in Inheritance
+===============================
+
+>>> File: Constructor_inInheritance.java <<<
+--------------------------------------------------------------------
+/**
+ * Constrauctors in Inheritance
+ * =============================
+ * 1. Constrauctors are not inherited by subclass.
+ * 2. Sub class 's contructor invokes constructor of super class.
+ * 3. Explicit constructor from sub class's constructor can be made using super().
+ * 4. "super" -> In sub class constructor that invokes the constructor of the
+ *     super class either by using "Spuer" or implicitly.
+ * a. Implicit constructor in super class and subclass.
+ * b. Implicit constructor in subclass and explicit constructor in super class.
+ * c. Implicit constructor in superclass and explicit constructor in subclass.
+ * d. Explicit cpnstructor in superclass & subclass. 
+*/
+
+class Parent {
+    public Parent() { System.out.println("Parent: Cons 1"); }
+    public Parent(int x) { System.out.println("Parent: Cons 2"); }
+}
+
+class Child extends Parent {
+    public Child() { 
+        // Bydefault it call constrictor 1 which has no arg if super keyword not explicitly used. 
+        super(1);    // Child constructor 2
+        System.out.println("Child"); 
+    }
+} 
+
+public class  Constructor_inInheritance 
+{
+    public static void main(String[] args) {
+        Child obj = new Child();
+        // Parent: Cons 2
+        // Child
+    }
+}
+
+--------------------------------------------------------------------
+
+=======================================================================
+
+22. Constructor Chaning
+========================
+
+>>> File: ConstructorChaning.java <<<
+--------------------------------------------------------------------
+/** Constructor Chaning
+ *  =====================
+ *  1. Constructor cancall other condtructor of the same class or super class.
+ *  2. Constructor call form a constructror must be the first step.(
+ *      call should appear in the first line)
+ *  3. Such series of invocation of constructors is known as contructor chanining.
+ *  4. Firt line of constructor is either super() or this() (Bydefault super())
+ *  5. Sonctrucotr newver contains super() & this() both.
+*/
+
+class Parent {
+    public Parent() 
+    { System.out.println("Parent 1");}
+}
+
+class Child extends Parent {
+    public Child() {
+        // We can either write super OR this
+        this(4);
+        System.out.println("Child 1");
+    }
+
+    public Child(int x ) { 
+        // super();
+        System.out.println("Child 2"); 
+    }
+}
+
+
+public class ConstructorChaning 
+{
+    public static void main(String[] args) { 
+        Child obj1 = new Child();
+    }
+}
+--------------------------------------------------------------------
+
+=======================================================================
+
+24. Abstract Class
+===================
+
+>>> File: AbstractClass.java <<<
+--------------------------------------------------------------------
+/**
+ * Abstract Class
+ * ===============
+ * 1. Abstract classes are declared with the abstract keyword.
+ * 2. An abstract class can't be inistantiated.
+ * 3. It's usesd to declare common characteristicsof subclass.
+ * 4. It can only be used as a superclass for other 
+ *    classes that extends the abstract class.
+ * 5. It contains fields.
+ * 6. You can't create obj of abstract class.
+ * 7. But you can create reference variable.
+ */
+
+abstract class Parent {
+
+} 
+
+class Child extends Parent {
+
+}
+
+public class AbstractClass 
+{
+    public static void main(String[] args) {
+        // Reference varaible -> obj1
+        // obj initialized -> new Child()
+        Parent obj1 = new Child();
+    }
+}
+--------------------------------------------------------------------
+
+=======================================================================
+
+25. Abstract Method 
+====================
+
+>>> File: AbstractMethod.java <<<
+--------------------------------------------------------------------
+/**
+ *  Abstract Method 
+ *  ================
+ *       Contain no implement decalared by semi colon rahter than block. 
+ *  This method must be inside of abstract class.
+ * 1. Class having abstract method (declared OR inherited) -> Entire class must be as abstract.
+*/
+
+
+abstract class Parent {
+    abstract void show();
+}
+
+abstract class Child extends Parent {
+
+}
+
+class AnotherChild extends Parent {
+    // Override inheriated abstract method of parent to use it bys obj.
+    void show() {  }
+}
+
+public class AbstractMethod 
+{
+    public static void main(String[] args) {
+        AnotherChild ac = new AnotherChild();
+        ac.show();
+    }
+}
+--------------------------------------------------------------------
+
+=======================================================================
+
+26. Interface 
+==============
+Interface Vs. Abstract class
+---------------------------------------------------------------------
+1. Interface have only public   | * Class has any access modifieres. 
+    modifier.                   |
+2. It does'nt have defined      | * Abs. class may Or may not have
+    method.                     | abs. method.
+3. It has only static variable &| * It may have any modifiers & 
+    public methods bydefault &  |   static Or non-static member.
+    permanent.                  |
+4. It has only final variable.  | * It may or may not have fianl 
+                                |   variable.
+5. It does;nt have constructor. | * It has constructor.
+---------------------------------------------------------------------
+
+>>> File: Interface.java <<<
+--------------------------------------------------------------------
+import java.sql.Time;
+
+/** 
+ * Interface 
+ * ==========
+ * 1. All member of interface are public & abstract & it can't be changed.
+ * 2. variable(field) -> public, static & final & necessasry to be filled eith value
+ * 3. object of Interface can't be created.
+ * 4. Interface does'nt have constructor.
+ * 5. Reference variable of interface can be made.
+ * 6. Object of interface can;t create but creation of object reference is possible.
+ * 7. Object ref. of interface can refer can refer to any its subclass type.
+ */
+
+
+interface Admission {
+    void admissionDate();   // public & abstract
+    int setAdmissionTime = 1400;  // public, static & final & necessasry to be filled eith value.
+}
+
+interface Dropout { void dropoutDate(); }
+
+interface Bailout extends Admission, Dropout { void bailoutDate(); }
+
+class Person {} 
+
+class Student extends Person implements Bailout {
+    public void admissionDate() {}
+    public void dropoutDate() {}
+    public void bailoutDate() {}
+    public void func() { }
+}
+
+public class Interface 
+{
+    public static void main(String[] args) {
+        // Functions will work
+        Student obj = new Student();
+        obj.admissionDate();
+        obj.dropoutDate();
+        obj.bailoutDate();
+        obj.func();
+
+        // No other function will work. Cause of
+        // reference variable only points to Dropout interface
+        Dropout ref = new Student();
+        ref.dropoutDate();
+        // obj.bailoutDate();  // error
+        // obj.func();         // error
+    }
+}
+--------------------------------------------------------------------
+
+=======================================================================
+
+
+27. from Keyword -> Input Taken 
+================================
+
+>>> File: Form.java <<<
+--------------------------------------------------------------------
+/**
+ * Input from Keyword
+ * ===================
+ * 1. Read input frp, system.in using Scanner class.
+ * 2. Scanner is final class.
+ * 3. Scanner class is a part of java.util package.
+ * 4. Scanner breaks its input into tokens using a delimiter pattern, 
+ *      which is bydefault matches whitespace.
+ * 5. They resulting tokens may be converted into values of diff.
+ *      types using the various next methods.
+ * 6. These input taken from buffer which is like array.
+ *      taken character by character.
+ *      a. next()       // 1 word
+ *      b. nextLine()   // Multiple words.
+ *      c. nextBoolean()
+ *      d. nextByte()
+ *      e. nextDouble()
+ *      f. nextFlaot()
+ *      g. nextInt()
+ *      h. nextLong()
+ *      i. nextShort()    
+ */
+
+import java.util.Scanner; // java.util.*
+
+public class From {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter your name: ");
+        String name = sc.nextLine();
+        
+        System.out.print("Enter age: ");
+        int age = sc.nextInt();
+
+        System.out.println("\nName: " + name + "\nAge: " + age);
+    }
+}
+--------------------------------------------------------------------
+
+=======================================================================
+
+
+28. Array(1D & 2D) 
+===================
+
+>>> File: Array.java <<<
+--------------------------------------------------------------------
+import java.util.Scanner;
+
+class Array {
+    public static void main(String[] args) {
+        int _1D[] = new int[5];
+        String _2D[][] = new String[3][3];  //row, column
+        Scanner sc = new Scanner(System.in);
+        
+        // // 1D _1Day
+        System.out.print("Enter 5 numbers: ");
+
+        // Input in _1Day
+        for (int i=0; i< _1D.length; i++) 
+          {  _1D[i] = sc.nextInt(); }
+
+        // Print 1D _1Day
+        for (int i=0; i<_1D.length; i++) 
+           { System.out.println("_1D["+ i +"] = " + _1D[i]); }
+    
+        // 2D _1Day
+        System.out.print("Enter 9 times: ");
+        
+        // Input in _1Day
+        for (int i=0; i< _2D.length; i++) {
+            for (int j=0; j < _2D[i].length; j++){
+                _2D[i][j] = sc.next();
+            }
+        }
+    
+        // Print 2D _1Day
+        for (String data[]: _2D) {
+            for (String scoop: data) {
+                System.out.print(scoop+ " ");
+            }
+        }
+    }
+}    
+
+--------------------------------------------------------------------
+
+=======================================================================
+
+29. String Class 
+=================
+
+>>> File: StringClass.java <<<
+--------------------------------------------------------------------
+/**
+ * String Class
+ * =============
+ * 1. This class resides in java.lang.String class.
+ * 2. This class is final.
+ * 3. This class is immutable -> Can't chaged on same reference.
+ * 4. 2 or more String characters in the same seq. the 
+ *      they share the same ref. in memory.
+ *      * String str1 = "My name is Bond";
+ *      * String str2 = "My name is Bond";
+ *      * String str3 = "My name" + "is Bond";
+ *      NOTE: All string ref. str1, str2, str3 denote the same obj.
+ * 5. Ways to declare class.
+ *      String str = new String("My name is bond");
+ *      String str = "My name is bond";
+ */
+
+
+public class StringClass {
+    public static void main(String[] args) {
+        // Both ref. varvables share same memory location.
+        String s1 = "Computer";
+        String s2 = "Computer";
+
+        // New ref. variable formed.
+        String s3 = new String("Computer");
+
+        /// Comparing values & reference variable
+        // Ref. variable (memory address) -> true
+        System.out.println("Result 1: "+(s1 == s2));
+        // Comparing s1 & s2 values 
+        System.out.println("Result 2: "+s1.equals(s2));
+        // Ref. variable (memory address) -> false
+        System.out.println("Result 3: "+(s1 == s3));
+        // Comparing s1 & s3 values 
+        System.out.println("Result 4: "+s1.equals(s3));
+    }
+}
+
+--------------------------------------------------------------------
+
+=======================================================================
+
+30. StringMethods 
+==================
+
+>>> File: StringMethods.java <<<
+--------------------------------------------------------------------
+/** 
+ * String Methods
+ * ===============
+ * # Case Conversion
+ * 1. toUpperCase()
+ * 2. toLowerCase()
+ * 
+ * # indexOf()
+ * 1. indexOf(int char)
+ * 2. indexOf(int char, int fromIndex)
+ * 3. indexOf(String str)
+ * 4. indexOf(String str, int fromIndex)
+ * 5. lastIndexOf(int char)
+ * 6. lastIndexOf(int char, int fromIndex)
+ * 7. lastIndexOf(String str)
+ * 8. lastIndexOf(String str, int fromIndex)
+ * 
+ * # Comparing Strings
+ * 1. equals(String someString)
+ * 2. equalsIgnoreCase(String anotherString)
+ * 3. compareTo(String s)
+ * 
+ * # Substring
+ * 1. substring(int beginIndex)
+ * 2. substring(int beginIndex, int endIndex)
+ */
+
+public class StringMethods {
+    public static void main(String[] args) {
+        String s1 = new String("Computer");
+        String s2 = new String("computer");
+        System.out.println(s1);  // Computer
+
+        //// Case conversion:
+        // 1. toUpperCase()  
+        // 2. toLowerCase()
+        s1 = s1.toUpperCase();
+        System.out.println(s1);  // COMPUTER
+        s1 = s1.toLowerCase();
+        System.out.println(s1);  // computer
+
+        //// IndexOf
+        int i = s1.indexOf("m");
+        System.out.println(i);  // 2
+        
+        i = s1.indexOf("m", 3);
+        System.out.println(i);  // -1 (because m is at 2 index)
+
+        i = s1.indexOf("ute");
+        System.out.println(i);  // 4
+        
+        i = s1.indexOf("ute", 3);  
+        System.out.println(i);  // 4
+
+        //// lastIndexOf
+        i = s1.lastIndexOf("m");
+        System.out.println(i);  // 2
+        
+        i = s1.lastIndexOf("m", 3);
+        System.out.println(i);  // 2 
+
+        i = s1.lastIndexOf("ute");
+        System.out.println(i);  // 4
+        
+        i = s1.lastIndexOf("ute", 3);  
+        System.out.println(i);  // -1 (At index 3, it traverse to right to left)
+
+        //// Comparing String
+        Boolean b = s1.equals(s2);
+        System.out.println(b);      // false
+
+        b = s2.equalsIgnoreCase("COMPUTER");
+        System.out.println(b);     // true
+
+        i = s1.compareTo(s2);
+        System.out.println(i);   // 32, if int == 0; else not equal.
+
+        //// Substring
+        s2 = s1.substring(4);
+        System.out.println(s2);  // uter
+
+        s2 = s1.substring(4, 5);
+        System.out.println(s2); // u
+    }
+}
+
+--------------------------------------------------------------------
+
+=======================================================================
+31. Exception Handling
+=======================
+
+Throwable Class
+----------------
+1. String variable that can bet set by subclass to provide a detail 
+    msg that provide more info. of the exception occured.
+2. All classes of Throwable defines a one-parameter constructor
+    that takes a string as the detail msg.
+3. The class Trowable provides getMessage() function to 
+    retrieve an exception.
+
+Exception Class
+----------------
+1. The class Exception represents exceptinos that a program
+    faces due to abnormal or apecial cond. during exec.
+2. Exception can be 2 types: 
+    a. Checked (Compile time exception)
+    b. Unchecked (Run-time exception)
+
+Note: ArrayOutOfBounds, NullPointerException, ..are all subclasses
+    of the java.lang.RuntimeException class, which is subclass of the 
+    exception class. 
+
+Unchecked Exception
+--------------------
+1. try/catch block can have multiple catch blocks.
+2. try block can either have catch block(s) OR final block OR both.
+3. final block is only one.
+4. catch blocks can be many.
+5. In exception class, try subclass of relavent exception
+      rather than super class.
+
+Explicit Exception
+-------------------
+1. throw <throwableInstance>
+2. The Exception ref.must be of type Throwable class or one of its 
+    subclass.
+3. A detailed msg can be passed when the exception object is created.
+
+Checked Exception
+------------------
+1. Checked exception forc3es programmers to deal eith the exception that
+    may be thrown.
+2. IOException, SQLException, IllegalThreadStateException, etc
+    are checked checked exception.
+3. Checked means they will be checked at compile-time.
+
+
+
+
+>>> File: ExceeptionHandling.java <<<
+--------------------------------------------------------------------
+/**
+ * 1. try/catch block can have multiple catch blocks.
+ * 2. try block can either have catch block(s) OR final block OR both.
+ * 3. final block is only one.
+ * 4. catch blocks can be many.
+ * 5. In exception class, try subclass of relavent exception
+ *      rather than super class.
+ */
+
+public class ExceptionHandling {
+    public static void main(String[] args) {
+        try {
+            System.out.println(3/0);
+            System.out.println("try");
+        }
+        catch(ArithmeticException e){
+            System.out.println("Exception: " + e.getMessage());
+        }
+        catch(NullPointerException e){
+            System.out.println("Exception: " + e.getMessage());
+        }
+        finally {
+            System.out.println("final");
+        }
+    }    
+}
+--------------------------------------------------------------------
+
+>>> File: ExplicitThrowException.java <<<
+--------------------------------------------------------------------
+/**
+ * 1. We want to set a diff. msg.
+ * 2. Java can't recognize exceptional situation 
+ *      of business logic.
+ */
+
+public class ExplicitThrowException {
+    public static void main(String[] args) {
+        try {
+            int balance = 5000;
+            int withDrawalAmount = 3000;
+    
+            if (balance < withDrawalAmount)
+                throw new ArithmeticException("Insufficient balance");
+    
+            balance = balance-withDrawalAmount;
+            System.out.println("Transaction successfully completed");    
+        }
+        catch (ArithmeticException e) {
+            System.out.println("Exception: "+ e.getMessage());
+        }
+        System.out.println("Program continue..");
+    }    
+}
+--------------------------------------------------------------------
+
+>>> File: CheckedException.java <<<
+--------------------------------------------------------------------
+import java.io.*;
+
+public class CheckedException {
+    
+    // // This function compiled successfully but throws at run-time
+    // public static void main(String[] args) throws IOException, IllegalThreadStateException
+    // {
+    //     throw new IOException();
+    // }
+    
+    public static void main(String[] args) {
+        try {
+            throw new IOException();
+        }
+        catch(IOException e) {
+            System.out.println("Exception: " + e.getMessage());
+        }
+    } 
+}
+--------------------------------------------------------------------
+
+=======================================================================
+32. Nexted Class 
+===================
+
+>>> File: NestedClass.java <<<
+--------------------------------------------------------------------
+/**
+ * Nested Class
+ * =============
+ * 1. Nested class is also member of super class as like methods & variables.
+ * 2. The class holde inner class called outer class.
+ * 3. Outer class maybe public OR default. Altho; Inner class can be private,
+ *      protected, public OR default.
+ * 4. Types of inner class:
+ *      a. static inner class:
+ *          1. Static inner class instance can be created outside the 
+ *              the outer class with the following syntax;
+ *                  Outer.inner obj = new Outer.inner()
+ *          2. static inner class can only access outer static members.
+ *      b. non-static inner class:
+ *          1. non-static inner class instance can be created outside the 
+ *              the outer class with the following syntax;
+ *                  Outer out = new Outer();
+ *                  Outer.inner obj = out.new inner()
+ *          2. non-static inner class can access all outer members.
+ * 5. Innerclass compiled as Outer%Inner.class
+*/
+class Outer {
+    static int x;        // static member varable
+    int y;               // member varable
+    void f1() { }        // member function
+    class Inner_meber {} // member class
+
+    // Inner non-static class
+    static class Inner_Static {
+        void innerStaticFunction() {
+            System.out.println("innerStaticFunction()"+x);
+        }
+    }
+    
+    // Inner Static class
+    // Inner class has authority to access outer member.
+    class Inner_NonStatic {
+        void innerNonStaticFunction() {
+            System.out.println("innerNonStaticFunction()"+y);
+        }
+    }
+}
+
+public class NestedClass {
+    public static void main(String[] args) {
+        // static class member
+        Outer.Inner_Static  obj1 = new Outer.Inner_Static();
+        obj1.innerStaticFunction();
+
+        // non-static class member
+        Outer out = new Outer();
+        Outer.Inner_NonStatic obj2 = out.new Inner_NonStatic();
+        obj2.innerNonStaticFunction();
+    }
+}
+
+--------------------------------------------------------------------
+
+javac NestedClass.java 
+java NestedClass 
+
+=======================================================================
+34. Generic Methods 
+===================
+
+>>> File: GenericMethod.java <<<
+--------------------------------------------------------------------
+/**
+ * Generic Method
+ * ===============
+ * 1. All generic method declarations have a type
+ *    parameter section delimeter by angle brackets
+ *    (< and >) that precedes the method's return type.
+ * 2. Each type parameter section contains one or
+ *    more type paramter section containe one or 
+ *    more type paramter separated by commas.
+ *      Syntax: public <E1, E2> void <name>(E1 x, E2) {}
+ * 3.This can also be return type.
+ */
+
+ public class GenericMethod 
+ {
+    public <E> void printArray(E[] items) {
+        for(E item:items) {
+            System.out.println(item);
+        }
+    }
+
+    public static void main(String[] args) {
+        String[] countries = {"Chine", "India", "Paksitan"};
+        Integer[] ages = {12}; 
+
+        GenericMethod gm = new GenericMethod();
+        gm.printArray(countries);
+        gm.printArray(ages);
+    }
+ }
+
+--------------------------------------------------------------------
+
+=======================================================================
+
+35. Generic Class 
+==================
+
+>>> File: GenericClass.java <<<
+--------------------------------------------------------------------
+/** Generic Class
+ * ===============
+ */
+
+class Gen <T, U> {
+    T i;
+    U j;
+    public void setT(T i1) { i=i1; }
+    public void setU(U i1) { j=i1; }
+
+    public T getT(){ return(i); }
+    public U getU(){ return(j); }
+}
+
+
+public class GenericClass {
+    public static void main(String[] args) {
+        Gen<Integer, String> g1= new Gen<Integer, String>();
+        g1.setT(5);
+        g1.setU("hamza");
+
+        System.out.println(g1.getT() + " " + g1.getU());
+    }   
+}
+
+--------------------------------------------------------------------
+
+=======================================================================
+
+. 
+===================
+
+>>> File: .java <<<
+--------------------------------------------------------------------
+
+--------------------------------------------------------------------
+
+=======================================================================
+
+. 
+===================
+
+>>> File: .java <<<
+--------------------------------------------------------------------
+
+--------------------------------------------------------------------
+
+=======================================================================
+
+. 
+===================
+
+>>> File: .java <<<
+--------------------------------------------------------------------
+
+--------------------------------------------------------------------
+
+=======================================================================
+
+. 
+===================
+
+>>> File: .java <<<
+--------------------------------------------------------------------
+
+--------------------------------------------------------------------
+
+=======================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
