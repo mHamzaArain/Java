@@ -1,6 +1,9 @@
 /**
  * final Keyword
  * ==============
+ * 1. final class can't be inherit.
+ * 2. final method can't be inherit or overrideby child class.
+ * 3. final blank varoiable can be set only in constructor.
  * a. final instance variable: 
  * b. final static variable:
  *    ------------------------ 
