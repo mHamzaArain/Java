@@ -6,7 +6,7 @@
  * @since Assignment-01
  * @see Employee query
  * 
- * github: 
+ * github: https://github.com/mHamzaHanif/Java/
  *  
  * -----------------------------------------------------------
  */
@@ -180,12 +180,16 @@ class BasePlusCommisionEmployee extends CommissionEmployee {
 
 public class Assignment {
     public static void main(final String[] args) {
+        // Instantiate ArrayList of Employ type
         final ArrayList<Employee> list = new ArrayList<Employee>();
+
+        // Adding employee obj into ArrayList
         list.add(new SalariedEmployee("Hamza", "Hanif", "666"));
         list.add(new HourlyEmployee("Imran", "Azher", "992", 55));
         list.add(new CommissionEmployee("Uzair", "Qureshi", "999", 13401));
         list.add(new BasePlusCommisionEmployee("Ehtesham", "Attar", "809", 76));
 
+        // To print these objs in loop
         for (final Employee e : list) {
             System.out.println("\n========================================");
             System.out.println(e.toString());
